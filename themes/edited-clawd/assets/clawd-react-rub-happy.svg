@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500">
+  <defs>
+    <style>
+      .rub-body { transform-box: fill-box; transform-origin: 50% 100%; animation: rub-body 2.6s 1 ease-in-out forwards; }
+      .rub-left { transform-box: fill-box; transform-origin: 100% 50%; animation: rub-left 0.18s 10 alternate ease-in-out; }
+      .rub-right { transform-box: fill-box; transform-origin: 0% 50%; animation: rub-right 0.18s 10 alternate ease-in-out; }
+      .rub-shadow { transform-box: fill-box; transform-origin: 50% 50%; animation: rub-shadow 0.22s 8 alternate ease-in-out; }
+      .rub-blush { animation: rub-blush 2.6s 1 step-end forwards; }
+      @keyframes rub-body {
+        0%, 8%, 92%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+        16%, 32%, 48%, 64% { transform: translate(-2px, 0) rotate(-4deg) scale(1.03, 0.97); }
+        24%, 40%, 56%, 72% { transform: translate(2px, -1px) rotate(4deg) scale(1.03, 0.97); }
+        80% { transform: translate(0, 1px) scale(1.08, 0.90); }
+        86% { transform: translate(0, -1px) scale(0.98, 1.04); }
+      }
+      @keyframes rub-left { from { transform: rotate(12deg); } to { transform: rotate(48deg); } }
+      @keyframes rub-right { from { transform: rotate(-12deg); } to { transform: rotate(-48deg); } }
+      @keyframes rub-shadow { from { transform: translateX(-1px) scaleX(0.92); opacity: 0.42; } to { transform: translateX(1px) scaleX(1.08); opacity: 0.55; } }
+      @keyframes rub-blush { 0%, 8%, 92%, 100% { opacity: 0; } 9%, 91% { opacity: 0.95; } }
+    </style>
+  </defs>
+  <rect class="rub-shadow" x="3" y="15" width="9" height="1" fill="#000000" opacity="0.5"/>
+  <g id="accessory-anchor" class="rub-body">
+    <g fill="#DE886D">
+      <rect x="3" y="13" width="1" height="2"/><rect x="5" y="13" width="1" height="2"/>
+      <rect x="9" y="13" width="1" height="2"/><rect x="11" y="13" width="1" height="2"/>
+      <rect x="2" y="6" width="11" height="7"/>
+      <g class="rub-left"><rect x="0" y="9" width="2" height="2"/></g>
+      <g class="rub-right"><rect x="13" y="9" width="2" height="2"/></g>
+    </g>
+    <g fill="none" stroke="#000000" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="4,8 5.5,9 4,10"/><polyline points="11,8 9.5,9 11,10"/>
+    </g>
+    <g class="rub-blush" fill="#F05E78"><rect x="3" y="11" width="1" height="1"/><rect x="11" y="11" width="1" height="1"/></g>
+  </g>
+</svg>

@@ -1,0 +1,11 @@
+node_modules/
+backups/
+generated/
+*.asar
+*.asar.unpacked/
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+coverage/

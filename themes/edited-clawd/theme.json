@@ -1,0 +1,1148 @@
+{
+  "schemaVersion": 1,
+  "name": "Edited.clawd",
+  "author": "Sangcheol",
+  "version": "1.3.0",
+  "description": "기존 쓰다듬기와 함께 쉬기, 생각, 작업, 알림, 클릭에 반응하는 귀여운 모션 13종 추가",
+  "customization": {
+    "petTint": true,
+    "accessories": {
+      "default": {
+        "staticFrame": {
+          "cx": 7.5,
+          "baseY": 6.5,
+          "width": 16
+        }
+      },
+      "files": {
+        "clawd-idle-follow.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "torso",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-dizzy.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "upper-body",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-happy.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "torso",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-idle-look.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "torso",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-idle-yawn.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "torso",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-mini-idle.svg": {
+          "staticFrame": {
+            "cx": 5.733,
+            "baseY": 6.686,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-mini-alert.svg": {
+          "staticFrame": {
+            "cx": 5.733,
+            "baseY": 6.686,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-mini-happy.svg": {
+          "staticFrame": {
+            "cx": 5.733,
+            "baseY": 6.686,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-mini-peek.svg": {
+          "staticFrame": {
+            "cx": 5.733,
+            "baseY": 6.686,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-mini-typing.svg": {
+          "staticFrame": {
+            "cx": 5.733,
+            "baseY": 6.686,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-mini-crabwalk.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "torso",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-mini-enter.svg": {
+          "staticFrame": {
+            "cx": 5.733,
+            "baseY": 6.686,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-working-thinking.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "torso",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-working-typing.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "hitBoxPadding": {
+            "left": 1,
+            "top": 1,
+            "right": 1,
+            "bottom": 1
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-notification.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-working-building.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 1,
+            "width": 16
+          },
+          "hitBoxPadding": {
+            "left": 2,
+            "top": 4,
+            "right": 2,
+            "bottom": 4
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 1,
+              "width": 16
+            }
+          }
+        },
+        "clawd-headphones-groove.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "hitBoxPadding": {
+            "left": 1.5,
+            "top": 1.5,
+            "right": 1.5,
+            "bottom": 1.5
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-working-juggling.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-idle-bubble.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-idle-reading.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-error.svg": {
+          "visibility": "hidden"
+        },
+        "clawd-idle-doze.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-react-drag.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-react-left.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-react-right.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-react-annoyed.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-react-double.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-react-double-jump.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-react-petted.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-idle-play.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-react-rub-happy.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-react-highfive-left.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-react-highfive-right.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-react-belly-rub.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-working-sweeping.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-working-carrying.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-working-debugger.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-collapse-sleep.svg": {
+          "visibility": "hidden"
+        },
+        "clawd-sleeping.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 10,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "torso-sploot",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 10,
+              "width": 16
+            }
+          }
+        },
+        "clawd-wake.svg": {
+          "visibility": "hidden"
+        },
+        "clawd-mini-enter-sleep.svg": {
+          "visibility": "hidden"
+        },
+        "clawd-mini-sleep.svg": {
+          "visibility": "hidden"
+        },
+        "clawd-cute-stretch.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-sneeze.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-snack.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-star.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-ball.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-ponder.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-idea.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-cheer.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-letter.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-kiss.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-tapdance.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-shy.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-typing-bounce.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        }
+      }
+    }
+  },
+  "viewBox": {
+    "x": -15,
+    "y": -25,
+    "width": 45,
+    "height": 45
+  },
+  "layout": {
+    "contentBox": {
+      "x": -4,
+      "y": -3,
+      "width": 23,
+      "height": 20
+    },
+    "marginBox": {
+      "x": -8,
+      "y": -7,
+      "width": 30,
+      "height": 24
+    },
+    "centerX": 7.5,
+    "baselineY": 17,
+    "visibleHeightRatio": 0.58,
+    "baselineBottomRatio": 0.05
+  },
+  "eyeTracking": {
+    "enabled": true,
+    "states": [
+      "idle",
+      "dozing",
+      "mini-idle"
+    ],
+    "eyeRatioX": 0.489,
+    "eyeRatioY": 0.756,
+    "maxOffset": 3,
+    "bodyScale": 0.33,
+    "shadowStretch": 0.15,
+    "shadowShift": 0.3,
+    "ids": {
+      "eyes": "eyes-js",
+      "body": "body-js",
+      "shadow": "shadow-js",
+      "dozeEyes": "eyes-doze"
+    },
+    "shadowOrigin": "7.5px 15px"
+  },
+  "states": {
+    "idle": [
+      "clawd-idle-follow.svg"
+    ],
+    "roam": [
+      "clawd-mini-crabwalk.svg"
+    ],
+    "yawning": [
+      "clawd-idle-yawn.svg"
+    ],
+    "dozing": [
+      "clawd-idle-doze.svg"
+    ],
+    "collapsing": [
+      "clawd-collapse-sleep.svg"
+    ],
+    "thinking": [
+      "clawd-working-thinking.svg",
+      "clawd-cute-ponder.svg",
+      "clawd-cute-idea.svg"
+    ],
+    "working": [
+      "clawd-working-typing.svg"
+    ],
+    "juggling": [
+      "clawd-headphones-groove.svg"
+    ],
+    "sweeping": [
+      "clawd-working-sweeping.svg"
+    ],
+    "error": [
+      "clawd-error.svg"
+    ],
+    "attention": [
+      "clawd-happy.svg",
+      "clawd-cute-cheer.svg"
+    ],
+    "notification": [
+      "clawd-notification.svg",
+      "clawd-cute-letter.svg"
+    ],
+    "carrying": [
+      "clawd-working-carrying.svg"
+    ],
+    "sleeping": [
+      "clawd-sleeping.svg"
+    ],
+    "waking": [
+      "clawd-wake.svg"
+    ],
+    "dizzy": [
+      "clawd-dizzy.svg"
+    ]
+  },
+  "workingTiers": [
+    {
+      "minSessions": 3,
+      "file": "clawd-working-building.svg"
+    },
+    {
+      "minSessions": 2,
+      "file": "clawd-headphones-groove.svg"
+    },
+    {
+      "minSessions": 1,
+      "file": "clawd-cute-typing-bounce.svg"
+    }
+  ],
+  "jugglingTiers": [
+    {
+      "minSessions": 2,
+      "file": "clawd-working-juggling.svg"
+    },
+    {
+      "minSessions": 1,
+      "file": "clawd-headphones-groove.svg"
+    }
+  ],
+  "idleAnimations": [
+    {
+      "file": "clawd-idle-look.svg",
+      "duration": 6500
+    },
+    {
+      "file": "clawd-idle-bubble.svg",
+      "duration": 13500
+    },
+    {
+      "file": "clawd-idle-reading.svg",
+      "duration": 14000
+    },
+    {
+      "file": "clawd-idle-play.svg",
+      "duration": 8000
+    },
+    {
+      "file": "clawd-cute-stretch.svg",
+      "duration": 6000
+    },
+    {
+      "file": "clawd-cute-sneeze.svg",
+      "duration": 5000
+    },
+    {
+      "file": "clawd-cute-snack.svg",
+      "duration": 8000
+    },
+    {
+      "file": "clawd-cute-star.svg",
+      "duration": 7000
+    },
+    {
+      "file": "clawd-cute-ball.svg",
+      "duration": 8000
+    }
+  ],
+  "displayHintMap": {
+    "clawd-working-building.svg": "clawd-working-building.svg",
+    "clawd-working-typing.svg": "clawd-working-typing.svg",
+    "clawd-headphones-groove.svg": "clawd-headphones-groove.svg",
+    "clawd-working-juggling.svg": "clawd-working-juggling.svg",
+    "clawd-idle-reading.svg": "clawd-idle-reading.svg",
+    "clawd-idle-bubble.svg": "clawd-idle-bubble.svg",
+    "clawd-idle-play.svg": "clawd-idle-play.svg",
+    "clawd-working-debugger.svg": "clawd-working-debugger.svg",
+    "clawd-working-thinking.svg": "clawd-working-thinking.svg",
+    "clawd-cute-stretch.svg": "clawd-cute-stretch.svg",
+    "clawd-cute-sneeze.svg": "clawd-cute-sneeze.svg",
+    "clawd-cute-snack.svg": "clawd-cute-snack.svg",
+    "clawd-cute-star.svg": "clawd-cute-star.svg",
+    "clawd-cute-ball.svg": "clawd-cute-ball.svg"
+  },
+  "updateVisuals": {
+    "checking": "clawd-working-debugger.svg"
+  },
+  "timings": {
+    "minDisplay": {
+      "attention": 4000,
+      "error": 5000,
+      "sweeping": 5500,
+      "notification": 5000,
+      "carrying": 3000,
+      "working": 1000,
+      "thinking": 1000
+    },
+    "autoReturn": {
+      "attention": 4000,
+      "error": 5000,
+      "sweeping": 300000,
+      "notification": 5000,
+      "carrying": 3000,
+      "dizzy": 6000
+    },
+    "yawnDuration": 3000,
+    "wakeDuration": 1500,
+    "deepSleepTimeout": 600000,
+    "mouseIdleTimeout": 20000,
+    "mouseSleepTimeout": 60000
+  },
+  "hitBoxes": {
+    "default": {
+      "x": -1,
+      "y": 5,
+      "w": 17,
+      "h": 12
+    },
+    "sleeping": {
+      "x": -2,
+      "y": 9,
+      "w": 19,
+      "h": 7
+    },
+    "wide": {
+      "x": -3,
+      "y": 3,
+      "w": 21,
+      "h": 14
+    }
+  },
+  "fileHitBoxes": {
+    "clawd-working-typing.svg": {
+      "x": -2,
+      "y": -7,
+      "w": 20,
+      "h": 24
+    },
+    "clawd-working-building.svg": {
+      "x": -1,
+      "y": -2,
+      "w": 17,
+      "h": 19
+    }
+  },
+  "wideHitboxFiles": [
+    "clawd-error.svg",
+    "clawd-notification.svg"
+  ],
+  "sleepingHitboxFiles": [
+    "clawd-sleeping.svg",
+    "clawd-collapse-sleep.svg"
+  ],
+  "reactions": {
+    "drag": {
+      "file": "clawd-react-drag.svg"
+    },
+    "clickLeft": {
+      "file": "clawd-react-petted.svg",
+      "duration": 3200
+    },
+    "clickRight": {
+      "file": "clawd-cute-kiss.svg",
+      "duration": 3200
+    },
+    "hoverHead": {
+      "file": "clawd-react-petted.svg",
+      "duration": 3200
+    },
+    "rubHead": {
+      "file": "clawd-react-rub-happy.svg",
+      "duration": 2600
+    },
+    "hoverLeftClaw": {
+      "file": "clawd-react-highfive-left.svg",
+      "duration": 2600
+    },
+    "hoverRightClaw": {
+      "file": "clawd-react-highfive-right.svg",
+      "duration": 2600
+    },
+    "hoverBelly": {
+      "file": "clawd-react-belly-rub.svg",
+      "duration": 3200
+    },
+    "hoverFeet": {
+      "file": "clawd-cute-tapdance.svg",
+      "duration": 3500
+    },
+    "double": {
+      "files": [
+        "clawd-react-double.svg",
+        "clawd-react-double-jump.svg",
+        "clawd-cute-shy.svg"
+      ],
+      "duration": 3500
+    }
+  },
+  "miniMode": {
+    "supported": true,
+    "offsetRatio": 0.486,
+    "states": {
+      "mini-idle": [
+        "clawd-mini-idle.svg"
+      ],
+      "mini-alert": [
+        "clawd-mini-alert.svg"
+      ],
+      "mini-happy": [
+        "clawd-mini-happy.svg"
+      ],
+      "mini-enter": [
+        "clawd-mini-enter.svg"
+      ],
+      "mini-peek": [
+        "clawd-mini-peek.svg"
+      ],
+      "mini-working": [
+        "clawd-mini-typing.svg"
+      ],
+      "mini-crabwalk": [
+        "clawd-mini-crabwalk.svg"
+      ],
+      "mini-enter-sleep": [
+        "clawd-mini-enter-sleep.svg"
+      ],
+      "mini-sleep": [
+        "clawd-mini-sleep.svg"
+      ]
+    },
+    "timings": {
+      "minDisplay": {
+        "mini-alert": 4000,
+        "mini-happy": 4000
+      },
+      "autoReturn": {
+        "mini-alert": 4000,
+        "mini-happy": 4000
+      }
+    },
+    "glyphFlips": {
+      "pixel-z": 4,
+      "pixel-z-small": 3
+    }
+  },
+  "objectScale": {
+    "widthRatio": 1.9,
+    "heightRatio": 1.3,
+    "offsetX": -0.45,
+    "offsetY": -0.25
+  }
+}

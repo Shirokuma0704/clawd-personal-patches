@@ -1,0 +1,11 @@
+{
+  "platform": "Windows",
+  "installedPackageVersion": "1.0.0",
+  "upstream": "https://github.com/rullerzhou-afk/clawd-on-desk",
+  "upstreamCommit": null,
+  "recordedOn": "2026-09-05",
+  "baselineSources": {
+    "test/fixtures/tick.js": "4cede5987b1e99964c539b9aada837216bb6ed7c33c204403a3c62219930a8c1",
+    "test/fixtures/hit-renderer.js": "a1e47c6c792d3b410541ed615854f76aae55042106643246f99b9c30293e2c1e"
+  }
+}

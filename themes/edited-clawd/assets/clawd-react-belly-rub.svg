@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500">
+  <defs>
+    <style>
+      .belly-body { transform-box: fill-box; transform-origin: 50% 100%; animation: belly-body 3.2s 1 ease-in-out forwards; }
+      .belly-left { transform-box: fill-box; transform-origin: 100% 50%; animation: belly-left 3.2s 1 ease-in-out forwards; }
+      .belly-right { transform-box: fill-box; transform-origin: 0% 50%; animation: belly-right 3.2s 1 ease-in-out forwards; }
+      .belly-blush { animation: belly-blush 3.2s 1 step-end forwards; }
+      .belly-shadow { transform-box: fill-box; transform-origin: 50% 50%; animation: belly-shadow 3.2s 1 ease-in-out forwards; }
+      @keyframes belly-body { 0%, 8%, 92%, 100% { transform: none; } 18% { transform: translateY(1px) scale(1.10, 0.88); } 32%, 58% { transform: translate(-1px, 1px) rotate(-3deg) scale(1.08, 0.90); } 45%, 70% { transform: translate(1px, 1px) rotate(3deg) scale(1.08, 0.90); } 82% { transform: translateY(-1px) scale(0.98, 1.04); } }
+      @keyframes belly-left { 0%, 10%, 88%, 100% { transform: none; } 22%, 76% { transform: translate(3px, 1px) rotate(-22deg); } }
+      @keyframes belly-right { 0%, 10%, 88%, 100% { transform: none; } 22%, 76% { transform: translate(-3px, 1px) rotate(22deg); } }
+      @keyframes belly-blush { 0%, 14%, 88%, 100% { opacity: 0; } 15%, 87% { opacity: 1; } }
+      @keyframes belly-shadow { 0%, 100% { transform: scaleX(1); opacity: 0.5; } 18%, 76% { transform: scaleX(1.16); opacity: 0.58; } 82% { transform: scaleX(0.92); opacity: 0.42; } }
+    </style>
+  </defs>
+  <rect class="belly-shadow" x="3" y="15" width="9" height="1" fill="#000000" opacity="0.5"/>
+  <g id="accessory-anchor" class="belly-body">
+    <g fill="#DE886D">
+      <rect x="3" y="13" width="1" height="2"/><rect x="5" y="13" width="1" height="2"/>
+      <rect x="9" y="13" width="1" height="2"/><rect x="11" y="13" width="1" height="2"/>
+      <rect x="2" y="6" width="11" height="7"/>
+      <g class="belly-left"><rect x="0" y="9" width="2" height="2"/></g>
+      <g class="belly-right"><rect x="13" y="9" width="2" height="2"/></g>
+    </g>
+    <g fill="none" stroke="#000000" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="4,8 5.5,9 4,10"/><polyline points="11,8 9.5,9 11,10"/>
+    </g>
+    <g class="belly-blush" fill="#F05E78"><rect x="3" y="11" width="1" height="1"/><rect x="11" y="11" width="1" height="1"/></g>
+  </g>
+</svg>
