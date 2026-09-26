@@ -3,7 +3,7 @@
   "name": "Edited.clawd",
   "author": "Sangcheol",
   "version": "1.3.0",
-  "description": "기존 쓰다듬기와 함께 쉬기, 생각, 작업, 알림, 클릭에 반응하는 귀여운 모션 13종 추가",
+  "description": "기존 쓰다듬기와 함께 쉬기, 생각, 작업, 알림, 클릭에 반응하는 귀여운 모션 22종 추가",
   "customization": {
     "petTint": true,
     "accessories": {
@@ -797,6 +797,141 @@
               "width": 16
             }
           }
+        },
+        "clawd-cute-hum.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-butterfly.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-wink.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-spin.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-hiccup.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-flower.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-happy-dance.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-wave.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
+        },
+        "clawd-cute-oops.svg": {
+          "staticFrame": {
+            "cx": 7.5,
+            "baseY": 6.5,
+            "width": 16
+          },
+          "followTarget": {
+            "id": "accessory-anchor",
+            "frame": {
+              "cx": 7.5,
+              "baseY": 6.5,
+              "width": 16
+            }
+          }
         }
       }
     }
@@ -877,15 +1012,18 @@
       "clawd-working-sweeping.svg"
     ],
     "error": [
-      "clawd-error.svg"
+      "clawd-error.svg",
+      "clawd-cute-oops.svg"
     ],
     "attention": [
       "clawd-happy.svg",
-      "clawd-cute-cheer.svg"
+      "clawd-cute-cheer.svg",
+      "clawd-cute-happy-dance.svg"
     ],
     "notification": [
       "clawd-notification.svg",
-      "clawd-cute-letter.svg"
+      "clawd-cute-letter.svg",
+      "clawd-cute-wave.svg"
     ],
     "carrying": [
       "clawd-working-carrying.svg"
@@ -911,7 +1049,7 @@
     },
     {
       "minSessions": 1,
-      "file": "clawd-cute-typing-bounce.svg"
+      "file": "clawd-working-typing.svg"
     }
   ],
   "jugglingTiers": [
@@ -960,6 +1098,30 @@
     {
       "file": "clawd-cute-ball.svg",
       "duration": 8000
+    },
+    {
+      "file": "clawd-cute-hum.svg",
+      "duration": 6000
+    },
+    {
+      "file": "clawd-cute-butterfly.svg",
+      "duration": 8000
+    },
+    {
+      "file": "clawd-cute-wink.svg",
+      "duration": 4000
+    },
+    {
+      "file": "clawd-cute-spin.svg",
+      "duration": 4000
+    },
+    {
+      "file": "clawd-cute-hiccup.svg",
+      "duration": 5000
+    },
+    {
+      "file": "clawd-cute-flower.svg",
+      "duration": 7000
     }
   ],
   "displayHintMap": {
@@ -976,7 +1138,13 @@
     "clawd-cute-sneeze.svg": "clawd-cute-sneeze.svg",
     "clawd-cute-snack.svg": "clawd-cute-snack.svg",
     "clawd-cute-star.svg": "clawd-cute-star.svg",
-    "clawd-cute-ball.svg": "clawd-cute-ball.svg"
+    "clawd-cute-ball.svg": "clawd-cute-ball.svg",
+    "clawd-cute-hum.svg": "clawd-cute-hum.svg",
+    "clawd-cute-butterfly.svg": "clawd-cute-butterfly.svg",
+    "clawd-cute-wink.svg": "clawd-cute-wink.svg",
+    "clawd-cute-spin.svg": "clawd-cute-spin.svg",
+    "clawd-cute-hiccup.svg": "clawd-cute-hiccup.svg",
+    "clawd-cute-flower.svg": "clawd-cute-flower.svg"
   },
   "updateVisuals": {
     "checking": "clawd-working-debugger.svg"

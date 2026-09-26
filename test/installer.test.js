@@ -22,7 +22,7 @@ test('both installers patch an isolated archive, preserve unpacked assets and ar
   asar.uncache(archive);
   assert.equal(asar.statFile(archive,path.join('assets','svg','sentinel.svg')).unpacked,true);
   const after=hash(archive);run('apply-patch.js');run('apply-idle-patch.js');assert.equal(hash(archive),after);
-  const verify=execFileSync(process.execPath,['-e',`const a=require('@electron/asar'),assert=require('assert');assert(a.extractFile(process.argv[1],'src/tick.js').toString().includes('Personal ambient idle scheduling v1'));assert(a.extractFile(process.argv[1],'src/hit-renderer.js').toString().includes('Cute hover interactions (personal patch)'));`,archive],{env:{...process.env,NODE_PATH:path.join(repo,'node_modules')},encoding:'utf8'});
+  const verify=execFileSync(process.execPath,['-e',`const a=require('@electron/asar'),assert=require('assert');assert(a.extractFile(process.argv[1],'src/tick.js').toString().includes('Personal ambient idle scheduling v2'));assert(a.extractFile(process.argv[1],'src/hit-renderer.js').toString().includes('Cute hover interactions (personal patch)'));`,archive],{env:{...process.env,NODE_PATH:path.join(repo,'node_modules')},encoding:'utf8'});
   assert.equal(verify,'');
  } finally {
   const resolved=path.resolve(dir),temp=path.resolve(os.tmpdir())+path.sep;
