@@ -10,6 +10,7 @@ const star = `<path d="M0-2h1v2h2v1H1v2H0V1h-2V0h2Z" fill="#FFD77A"/>`;
 const note = c => `${rect(0,1,2,2,c)}${rect(1,-2,1,3,c)}${rect(2,-2,1,1,c)}`;
 const normal = rect(4,8,1,2,'#211F29')+rect(10,8,1,2,'#211F29');
 const happy = `<path d="M4 9v-1h2v1M9 9v-1h2v1" fill="none" stroke="#211F29" stroke-width="0.7"/>`;
+const squint = `<path d="M4 8l2 1l-2 1M11 8l-2 1l2 1" fill="none" stroke="#211F29" stroke-width="0.7"/>`;
 const closed = rect(4,9,2,0.6,'#211F29')+rect(9,9,2,0.6,'#211F29');
 // Per-segment easing: a keyframe's curve applies from that keyframe to the next one.
 const E = {io:'cubic-bezier(.45,0,.55,1)', out:'cubic-bezier(.22,1,.36,1)', in:'cubic-bezier(.64,0,.78,0)', back:'cubic-bezier(.34,1.56,.64,1)'};
@@ -152,7 +153,7 @@ const specs = [
   propAnim:[[0,{x:12.5,y:4,s:.3,o:0}],[10,{x:12.5,y:4,s:.3,o:0},'back'],[18,{x:12.5,y:4.5,o:1}],[56,{x:13,y:8,o:1},'in'],[66,{x:13,y:10,s:.6,o:0}],[100,{x:13,y:10,s:.6,o:0}]]},
  // --- Double-click pack. slot 'double-click' joins the shared pool picked on every 2-click, together with kiss.
  // All of them run 3.2s so the single reaction duration never cuts one short or replays its start.
- {id:'tickle',title:'간지러워 꺄르르',condition:'더블클릭 시 무작위',slot:'double-click',secs:3.2,eyes:happy,
+ {id:'tickle',title:'간지러워 꺄르르',condition:'더블클릭 시 무작위',slot:'double-click',secs:3.2,eyes:squint,
   body:[[6,{x:1.2,r:4,sx:.96,sy:1.04},'out'],[16,{x:.8,r:-3,sx:1.05,sy:.95}],[26,{x:1.2,r:4,sx:.96,sy:1.04}],[36,{x:.8,r:-3,sx:1.05,sy:.95}],[46,{x:1.2,r:4,sx:.96,sy:1.04}],[56,{x:.8,r:-3,sx:1.05,sy:.95}],[68,{x:.4,y:-.5,r:1}],[82,{}]],
   left:[[8,{x:2.5,y:-.5},'out'],[64,{x:2.5,y:-.5}],[80,{},'out']],
   right:[[6,{r:-40}],[16,{r:10}],[26,{r:-40}],[36,{r:10}],[46,{r:-40}],[56,{r:10}],[70,{}]],
@@ -162,7 +163,7 @@ const specs = [
           {cls:'giggle3',k:[[0,{x:-1,y:8,s:.3,o:0}],[40,{x:-1,y:8,s:.3,o:0},'out'],[46,{x:-2,y:6,s:1.2,o:1}],[64,{x:-2.5,y:3,o:0}],[100,{x:-2.5,y:3,o:0}]]},
           {cls:'blush',k:[[0,{o:.65}],[8,{o:1}],[70,{o:1}],[86,{o:.65}],[100,{o:.65}]]}]},
  {id:'hug-heart',title:'하트 받기 꼬옥',condition:'더블클릭 시 무작위',slot:'double-click',secs:3.2,
-  eyes:`<g class="eyesN">${normal}</g><g class="eyesH">${happy}</g>`,
+  eyes:`<g class="eyesN">${normal}</g><g class="eyesH">${squint}</g>`,
   body:[[18,{}],[30,{x:-.4,y:-.4,r:-4},'in'],[38,{sx:1.06,sy:.94},'out'],[46,{y:-.8,sx:.97,sy:1.03}],[56,{r:-3}],[66,{r:3}],[76,{r:-2}],[88,{}]],
   left:[[16,{},'out'],[30,{r:70}],[38,{x:3,y:-.5},'out'],[80,{x:3,y:-.5}],[92,{}]],
   right:mirror([[16,{},'out'],[30,{r:70}],[38,{x:3,y:-.5},'out'],[80,{x:3,y:-.5}],[92,{}]]),
@@ -172,7 +173,7 @@ const specs = [
           {cls:'eyesH',k:[[0,{o:0}],[36,{o:0}],[38,{o:1}],[86,{o:1}],[88,{o:0}],[100,{o:0}]]},
           {cls:'blush',k:[[0,{o:.65}],[40,{o:.65}],[48,{o:1}],[80,{o:1}],[90,{o:.65}],[100,{o:.65}]]}]},
  {id:'surprise',title:'깜짝! 느낌표',condition:'더블클릭 시 무작위',slot:'double-click',secs:3.2,
-  eyes:`<g class="eyesW">${rect(3.5,7.5,2,2,'#211F29')}${rect(9.5,7.5,2,2,'#211F29')}</g><g class="eyesH">${happy}</g>`,
+  eyes:`<g class="eyesW">${rect(3.5,7.5,2,2,'#211F29')}${rect(9.5,7.5,2,2,'#211F29')}</g><g class="eyesH">${squint}</g>`,
   body:[[4,{sx:1.08,sy:.9},'out'],[12,{y:-3.5,sx:.9,sy:1.12},'in'],[22,{sx:1.1,sy:.88},'out'],[30,{y:-.4}],[36,{}],[42,{x:.4}],[46,{x:-.4}],[50,{x:.4}],[54,{}],[66,{y:-.4,r:-3}],[78,{r:2}],[90,{}]],
   left:[[4,{},'out'],[12,{r:130}],[26,{r:110}],[40,{r:40}],[56,{}]],
   right:mirror([[4,{},'out'],[12,{r:130}],[26,{r:110}],[40,{r:40}],[56,{}]]),
