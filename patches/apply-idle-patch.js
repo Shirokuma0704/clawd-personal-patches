@@ -6,13 +6,17 @@ const path = require("node:path");
 const crypto = require("node:crypto");
 const asar = require("@electron/asar");
 
-const PATCH_MARKER = require("./idle-patch-transform").MARKER;
+// Idle scheduling and the roam guard for reactions both live in the main process, so one installer
+// patches both files and repacks the archive once.
+const TARGETS = [
+  { file: "src/tick.js", transform: require("./idle-patch-transform") },
+  { file: "src/pet-interaction-ipc.js", transform: require("./reaction-roam-transform") },
+];
 const INSTALL_DIR = process.argv[2] || path.join(process.env.LOCALAPPDATA || path.join(os.homedir(), "AppData", "Local"), "Programs", "Clawd on Desk");
 const RESOURCES_DIR = path.join(INSTALL_DIR, "resources");
 const ASAR_PATH = path.join(RESOURCES_DIR, "app.asar");
 const SCRIPT_DIR = __dirname;
 const BACKUP_DIR = path.join(SCRIPT_DIR, "..", "backups");
-const SNIPPET_PATH = path.join(SCRIPT_DIR, "idle-patch-transform.js");
 
 function fail(message) {
   throw new Error(`[cute-patch] ${message}`);
@@ -27,8 +31,8 @@ function replaceOnce(source, before, after, label) {
   return source.slice(0, first) + after + source.slice(first + before.length);
 }
 
-function patchHitRenderer(input) {
- const source = require("./idle-patch-transform").patch(input);
+function patchSource(transform, input) {
+ const source = transform.patch(input);
  require("node:vm").runInNewContext("new Function(source)", {source});
  return { source, alreadyPatched: source === input.replace(/\r\n/g, "\n") };
 }
@@ -65,13 +69,15 @@ function extractArchiveSafely(archivePath, destination) {
 
 async function main() {
   if (!fs.existsSync(ASAR_PATH)) fail(`app.asar not found: ${ASAR_PATH}`);
-  if (!fs.existsSync(SNIPPET_PATH)) fail(`snippet not found: ${SNIPPET_PATH}`);
 
-  const currentSource = asar.extractFile(ASAR_PATH, "src/tick.js").toString("utf8");
-  const patched = patchHitRenderer(currentSource);
-  new (require("node:vm").Script)(patched.source);
+  const patchedTargets = TARGETS.map((target) => {
+    const currentSource = asar.extractFile(ASAR_PATH, target.file).toString("utf8");
+    const patched = patchSource(target.transform, currentSource);
+    new (require("node:vm").Script)(patched.source);
+    return { ...target, ...patched };
+  });
   if (process.argv.includes("--check")) { console.log("[cute-patch] Compatibility and syntax checks passed."); return; }
-  if (patched.alreadyPatched) {
+  if (patchedTargets.every((target) => target.alreadyPatched)) {
     console.log("[cute-patch] Already applied. Nothing changed.");
     return;
   }
@@ -87,14 +93,18 @@ async function main() {
   const nextAsar = path.join(tempRoot, "app.asar");
   try {
     const missingUnpackedFiles = extractArchiveSafely(ASAR_PATH, extractedDir);
-    const hitRendererPath = path.join(extractedDir, "src", "tick.js");
-    if (!fs.existsSync(hitRendererPath)) fail("Extracted src/tick.js is missing.");
-    fs.writeFileSync(hitRendererPath, patched.source, "utf8");
+    for (const target of patchedTargets) {
+      const extractedPath = path.join(extractedDir, ...target.file.split("/"));
+      if (!fs.existsSync(extractedPath)) fail(`Extracted ${target.file} is missing.`);
+      fs.writeFileSync(extractedPath, target.source, "utf8");
+    }
 
     await require("./repack-preserving-layout")(ASAR_PATH, extractedDir, nextAsar);
 
-    const verification = asar.extractFile(nextAsar, "src/tick.js").toString("utf8");
-    if (!verification.includes(PATCH_MARKER)) fail("Repacked archive failed marker verification.");
+    for (const target of TARGETS) {
+      const verification = asar.extractFile(nextAsar, target.file).toString("utf8");
+      if (!verification.includes(target.transform.MARKER)) fail(`Repacked archive failed marker verification: ${target.file}`);
+    }
     const expectedInstalledHash = crypto.createHash("sha256").update(fs.readFileSync(nextAsar)).digest("hex");
     fs.copyFileSync(nextAsar, ASAR_PATH);
     const actualInstalledHash = crypto.createHash("sha256").update(fs.readFileSync(ASAR_PATH)).digest("hex");
@@ -115,7 +125,7 @@ async function main() {
   }
 }
 
-module.exports = { patchHitRenderer };
+module.exports = { patchSource };
 if (require.main === module) main().catch((error) => {
   console.error(error && error.stack ? error.stack : String(error));
   process.exitCode = 1;

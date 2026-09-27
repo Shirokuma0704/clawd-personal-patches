@@ -10,7 +10,7 @@ test('both installers patch an isolated archive, preserve unpacked assets and ar
   const app=path.join(dir,'app'),install=path.join(dir,'install'),patches=path.join(dir,'patches');
   fs.mkdirSync(path.join(app,'src'),{recursive:true});fs.mkdirSync(path.join(app,'assets','svg'),{recursive:true});
   fs.mkdirSync(path.join(install,'resources'),{recursive:true});fs.mkdirSync(patches,{recursive:true});
-  for(const f of ['tick.js','hit-renderer.js'])fs.copyFileSync(path.join(__dirname,'fixtures',f),path.join(app,'src',f));
+  for(const f of ['tick.js','hit-renderer.js','pet-interaction-ipc.js'])fs.copyFileSync(path.join(__dirname,'fixtures',f),path.join(app,'src',f));
   fs.writeFileSync(path.join(app,'assets','svg','sentinel.svg'),'<svg xmlns="http://www.w3.org/2000/svg"/>');
   for(const f of fs.readdirSync(path.join(repo,'patches')))fs.copyFileSync(path.join(repo,'patches',f),path.join(patches,f));
   const archive=path.join(install,'resources','app.asar');
@@ -22,7 +22,7 @@ test('both installers patch an isolated archive, preserve unpacked assets and ar
   asar.uncache(archive);
   assert.equal(asar.statFile(archive,path.join('assets','svg','sentinel.svg')).unpacked,true);
   const after=hash(archive);run('apply-patch.js');run('apply-idle-patch.js');assert.equal(hash(archive),after);
-  const verify=execFileSync(process.execPath,['-e',`const a=require('@electron/asar'),assert=require('assert');assert(a.extractFile(process.argv[1],'src/tick.js').toString().includes('Personal ambient idle scheduling v2'));assert(a.extractFile(process.argv[1],'src/hit-renderer.js').toString().includes('Cute hover interactions (personal patch)'));`,archive],{env:{...process.env,NODE_PATH:path.join(repo,'node_modules')},encoding:'utf8'});
+  const verify=execFileSync(process.execPath,['-e',`const a=require('@electron/asar'),assert=require('assert');assert(a.extractFile(process.argv[1],'src/tick.js').toString().includes('Personal ambient idle scheduling v2'));assert(a.extractFile(process.argv[1],'src/hit-renderer.js').toString().includes('Cute hover interactions (personal patch)'));assert(a.extractFile(process.argv[1],'src/pet-interaction-ipc.js').toString().includes('reactions cancel a pending roam'));`,archive],{env:{...process.env,NODE_PATH:path.join(repo,'node_modules')},encoding:'utf8'});
   assert.equal(verify,'');
  } finally {
   const resolved=path.resolve(dir),temp=path.resolve(os.tmpdir())+path.sep;
