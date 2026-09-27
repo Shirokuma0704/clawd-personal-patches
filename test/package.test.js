@@ -5,7 +5,7 @@ const root=path.join(__dirname,'..'),themeDir=path.join(root,'themes','edited-cl
 test('all theme SVG references exist, with no embedded active or remote content',()=>{
  const theme=JSON.parse(fs.readFileSync(path.join(themeDir,'theme.json'),'utf8'));
  const files=new Set(JSON.stringify(theme).match(/[\w-]+\.svg/g));
- assert.equal(files.size,64);
+ assert.equal(files.size,67);
  for(const file of files){const svg=fs.readFileSync(path.join(themeDir,'assets',file),'utf8');assert.match(svg,/<svg\b/);assert.doesNotMatch(svg,/<script\b|\bon\w+\s*=|(?:href|src)=["'](?:https?:|file:)/i);}
 });
 test('typing hands remain over the keyboard at both loop boundaries',()=>{

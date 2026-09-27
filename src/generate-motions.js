@@ -74,7 +74,7 @@ const specs = [
   body:[[10,{y:-1,sx:.97,sy:1.03},'in'],[16,{sx:1.04,sy:.96},'out'],[28,{r:4}],[42,{r:-4}],[56,{r:3.5}],[70,{r:-3.5}],[80,{}],[88,{y:-.6}],[94,{}]],
   left:letterArm,right:mirror(letterArm),
   prop:`<g>${rect(4,11,7,4,'#FFF0D8')}<path d="M4 11l3.5 2L11 11" fill="none" stroke="#D59887" stroke-width=".5"/></g>`},
- {id:'kiss',title:'쪽! 하트 보내기',condition:'몸의 오른쪽 더블클릭',secs:3.2,eyes:happy,
+ {id:'kiss',title:'쪽! 하트 보내기',condition:'더블클릭 시 무작위',secs:3.2,eyes:happy,
   body:[[18,{r:2,sx:1.03,sy:.97},'out'],[32,{y:-1,r:-5}],[55,{y:-.6,r:-4}],[72,{r:1}],[86,{}]],
   right:[[18,{r:15},'out'],[30,{x:-2.5,y:-1.5,r:-40}],[42,{x:-2.5,y:-1.5,r:-40},'out'],[52,{r:-60}],[72,{r:-20}],[88,{}]],
   prop:`<g class="prop">${heart}</g>`,
@@ -149,7 +149,38 @@ const specs = [
   left:[[8,{r:70}],[14,{r:50}],[20,{r:70}],[26,{r:50}],[40,{r:60}],[60,{r:10}],[72,{}]],
   right:[[8,{r:-70}],[14,{r:-50}],[20,{r:-70}],[26,{r:-50}],[40,{r:-60}],[60,{r:-10}],[72,{}]],
   prop:`<g class="prop">${rect(0,0,1,1,'#97CFD5')}${rect(-.5,1,2,1.5,'#97CFD5')}</g>`,
-  propAnim:[[0,{x:12.5,y:4,s:.3,o:0}],[10,{x:12.5,y:4,s:.3,o:0},'back'],[18,{x:12.5,y:4.5,o:1}],[56,{x:13,y:8,o:1},'in'],[66,{x:13,y:10,s:.6,o:0}],[100,{x:13,y:10,s:.6,o:0}]]}
+  propAnim:[[0,{x:12.5,y:4,s:.3,o:0}],[10,{x:12.5,y:4,s:.3,o:0},'back'],[18,{x:12.5,y:4.5,o:1}],[56,{x:13,y:8,o:1},'in'],[66,{x:13,y:10,s:.6,o:0}],[100,{x:13,y:10,s:.6,o:0}]]},
+ // --- Double-click pack. slot 'double-click' joins the shared pool picked on every 2-click, together with kiss.
+ // All of them run 3.2s so the single reaction duration never cuts one short or replays its start.
+ {id:'tickle',title:'간지러워 꺄르르',condition:'더블클릭 시 무작위',slot:'double-click',secs:3.2,eyes:happy,
+  body:[[6,{x:1.2,r:4,sx:.96,sy:1.04},'out'],[16,{x:.8,r:-3,sx:1.05,sy:.95}],[26,{x:1.2,r:4,sx:.96,sy:1.04}],[36,{x:.8,r:-3,sx:1.05,sy:.95}],[46,{x:1.2,r:4,sx:.96,sy:1.04}],[56,{x:.8,r:-3,sx:1.05,sy:.95}],[68,{x:.4,y:-.5,r:1}],[82,{}]],
+  left:[[8,{x:2.5,y:-.5},'out'],[64,{x:2.5,y:-.5}],[80,{},'out']],
+  right:[[6,{r:-40}],[16,{r:10}],[26,{r:-40}],[36,{r:10}],[46,{r:-40}],[56,{r:10}],[70,{}]],
+  prop:`<g class="giggle1">${rect(0,0,1,1,'#F4A5C4')}</g><g class="giggle2">${rect(0,0,1,1,'#FFE48D')}</g><g class="giggle3">${rect(0,0,1,1,'#B6BAF3')}</g>`,
+  tracks:[{cls:'giggle1',k:[[0,{x:-1,y:9,s:.3,o:0}],[6,{x:-1,y:9,s:.3,o:0},'out'],[12,{x:-2,y:7,s:1.2,o:1}],[30,{x:-3,y:4,o:0}],[100,{x:-3,y:4,o:0}]]},
+          {cls:'giggle2',k:[[0,{x:15,y:8,s:.3,o:0}],[20,{x:15,y:8,s:.3,o:0},'out'],[26,{x:16,y:6,s:1.2,o:1}],[44,{x:17,y:3,o:0}],[100,{x:17,y:3,o:0}]]},
+          {cls:'giggle3',k:[[0,{x:-1,y:8,s:.3,o:0}],[40,{x:-1,y:8,s:.3,o:0},'out'],[46,{x:-2,y:6,s:1.2,o:1}],[64,{x:-2.5,y:3,o:0}],[100,{x:-2.5,y:3,o:0}]]},
+          {cls:'blush',k:[[0,{o:.65}],[8,{o:1}],[70,{o:1}],[86,{o:.65}],[100,{o:.65}]]}]},
+ {id:'hug-heart',title:'하트 받기 꼬옥',condition:'더블클릭 시 무작위',slot:'double-click',secs:3.2,
+  eyes:`<g class="eyesN">${normal}</g><g class="eyesH">${happy}</g>`,
+  body:[[18,{}],[30,{x:-.4,y:-.4,r:-4},'in'],[38,{sx:1.06,sy:.94},'out'],[46,{y:-.8,sx:.97,sy:1.03}],[56,{r:-3}],[66,{r:3}],[76,{r:-2}],[88,{}]],
+  left:[[16,{},'out'],[30,{r:70}],[38,{x:3,y:-.5},'out'],[80,{x:3,y:-.5}],[92,{}]],
+  right:mirror([[16,{},'out'],[30,{r:70}],[38,{x:3,y:-.5},'out'],[80,{x:3,y:-.5}],[92,{}]]),
+  prop:`<g class="prop">${heart}</g>`,
+  propAnim:[[0,{x:-5,y:-2,s:.5,o:0}],[8,{x:-5,y:-2,s:.5,o:0},'out'],[16,{x:-2,y:-1,s:1,o:1}],[28,{x:3,y:1,r:-10}],[36,{x:7,y:9,s:.8},'out'],[48,{x:7,y:9,s:.95}],[58,{x:7,y:9,s:.8}],[68,{x:7,y:9,s:.95}],[80,{x:7,y:9,s:.8,o:1},'in'],[90,{x:7,y:7.5,s:.5,o:0}],[100,{x:7,y:7.5,s:.5,o:0}]],
+  tracks:[{cls:'eyesN',k:[[0,{o:1}],[36,{o:1}],[38,{o:0}],[86,{o:0}],[88,{o:1}],[100,{o:1}]]},
+          {cls:'eyesH',k:[[0,{o:0}],[36,{o:0}],[38,{o:1}],[86,{o:1}],[88,{o:0}],[100,{o:0}]]},
+          {cls:'blush',k:[[0,{o:.65}],[40,{o:.65}],[48,{o:1}],[80,{o:1}],[90,{o:.65}],[100,{o:.65}]]}]},
+ {id:'surprise',title:'깜짝! 느낌표',condition:'더블클릭 시 무작위',slot:'double-click',secs:3.2,
+  eyes:`<g class="eyesW">${rect(3.5,7.5,2,2,'#211F29')}${rect(9.5,7.5,2,2,'#211F29')}</g><g class="eyesH">${happy}</g>`,
+  body:[[4,{sx:1.08,sy:.9},'out'],[12,{y:-3.5,sx:.9,sy:1.12},'in'],[22,{sx:1.1,sy:.88},'out'],[30,{y:-.4}],[36,{}],[42,{x:.4}],[46,{x:-.4}],[50,{x:.4}],[54,{}],[66,{y:-.4,r:-3}],[78,{r:2}],[90,{}]],
+  left:[[4,{},'out'],[12,{r:130}],[26,{r:110}],[40,{r:40}],[56,{}]],
+  right:mirror([[4,{},'out'],[12,{r:130}],[26,{r:110}],[40,{r:40}],[56,{}]]),
+  prop:`<g class="prop">${rect(0,-3,1,3,'#FFD77A')}${rect(0,1,1,1,'#FFD77A')}</g>`,
+  propAnim:[[0,{x:7,y:3,s:.3,o:0}],[8,{x:7,y:3,s:.3,o:0},'back'],[16,{x:7,y:-1.5,s:1.3,o:1}],[24,{x:7,y:-.4,s:1}],[46,{x:7,y:-.7,o:1},'in'],[56,{x:7,y:-2,s:.7,o:0}],[100,{x:7,y:-2,s:.7,o:0}]],
+  tracks:[{cls:'eyesW',k:[[0,{o:1}],[54,{o:1}],[56,{o:0}],[100,{o:0}]]},
+          {cls:'eyesH',k:[[0,{o:0}],[54,{o:0}],[56,{o:1}],[100,{o:1}]]},
+          {cls:'blush',k:[[0,{o:.65}],[58,{o:.65}],[66,{o:1}],[84,{o:1}],[94,{o:.65}],[100,{o:.65}]]}]}
 ];
 function svg(s){
  // The body pivots on the floor at the crab's centre. fill-box would follow the body's bounding box,
@@ -171,13 +202,16 @@ for(const s of specs){theme.customization.accessories.files[s.file]={staticFrame
 for(const s of specs.slice(0,5)){if(!theme.idleAnimations.some(e=>e.file===s.file))theme.idleAnimations.push({file:s.file,duration:s.secs*1000});theme.displayHintMap[s.file]=s.file;}
 for(const [state,ids] of Object.entries({thinking:['ponder','idea'],attention:['cheer'],notification:['letter']})){for(const id of ids){const file=specs.find(s=>s.id===id).file;if(!theme.states[state].includes(file))theme.states[state].push(file);}}
 for(const s of specs.filter(s=>s.slot==='idle')){if(!theme.idleAnimations.some(e=>e.file===s.file))theme.idleAnimations.push({file:s.file,duration:s.secs*1000});theme.displayHintMap[s.file]=s.file;}
-for(const s of specs.filter(s=>s.slot&&s.slot!=='idle')){if(!theme.states[s.slot].includes(s.file))theme.states[s.slot].push(s.file);}
-theme.reactions.clickRight={file:'clawd-cute-kiss.svg',duration:3200};
+for(const s of specs.filter(s=>s.slot&&s.slot!=='idle'&&s.slot!=='double-click')){if(!theme.states[s.slot].includes(s.file))theme.states[s.slot].push(s.file);}
+// Both sides share one pool; the hit-renderer patch picks from `files`. `file` stays as the unpatched fallback.
+const doubleClickPool=['clawd-cute-kiss.svg',...specs.filter(s=>s.slot==='double-click').map(s=>s.file)];
+theme.reactions.clickLeft={file:'clawd-cute-tickle.svg',files:doubleClickPool,duration:3200};
+theme.reactions.clickRight={file:'clawd-cute-kiss.svg',files:doubleClickPool,duration:3200};
 theme.reactions.hoverFeet={file:'clawd-cute-tapdance.svg',duration:3500};
 if(!theme.reactions.double.files.includes('clawd-cute-shy.svg'))theme.reactions.double.files.push('clawd-cute-shy.svg');
 // One working session keeps the official typing motion; typing-bounce stays in the pack but is not wired in.
 theme.workingTiers.find(t=>t.minSessions===1).file='clawd-working-typing.svg';
-theme.version='1.3.0';
+theme.version='1.4.0';
 theme.description=`기존 쓰다듬기와 함께 쉬기, 생각, 작업, 알림, 클릭에 반응하는 귀여운 모션 ${specs.length}종 추가`;
 fs.writeFileSync(path.join(out,'theme.json'),JSON.stringify(theme,null,2)+'\n');
 fs.writeFileSync(path.join(out,'preview.html'),`<!doctype html><html lang="ko"><meta charset="utf-8"><title>Clawd 귀염뽀짝 모션 ${specs.length}종</title><style>body{background:#24212c;color:#f8e5dc;font:16px system-ui;margin:32px}h1{font-size:26px}main{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}article{background:#37313f;border:1px solid #685365;border-radius:18px;text-align:center;padding:12px}svg{width:100%;height:160px}h2{font-size:16px;margin:0}p{font-size:12px;color:#cdbbcf}button{padding:8px;background:#f4bdbe;border:0;border-radius:8px}</style><h1>Clawd의 작은 하루 · 새로운 모션 ${specs.length}종</h1><p>각 카드에서 실제 애니메이션이 반복돼요. 앱에서는 아래 조건에 따라 보여요.</p><main>${specs.map(s=>`<article>${svg(s).replace('viewBox="-15 -25 45 45"','viewBox="-6 -5 28 24"')}<h2>${s.title}</h2><p>${s.condition}</p></article>`).join('')}</main></html>`);

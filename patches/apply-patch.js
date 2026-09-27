@@ -7,6 +7,7 @@ const crypto = require("node:crypto");
 const asar = require("@electron/asar");
 
 const PATCH_MARKER = "// --- Cute hover interactions (personal patch) ---";
+const DOUBLE_CLICK_MARKER = "// Personal patch: double-click reaction pool";
 const INSTALL_DIR = process.argv[2] || path.join(process.env.LOCALAPPDATA || path.join(os.homedir(), "AppData", "Local"), "Programs", "Clawd on Desk");
 const RESOURCES_DIR = path.join(INSTALL_DIR, "resources");
 const ASAR_PATH = path.join(RESOURCES_DIR, "app.asar");
@@ -27,10 +28,39 @@ function replaceOnce(source, before, after, label) {
   return source.slice(0, first) + after + source.slice(first + before.length);
 }
 
+// clickLeft / clickRight normally take one `file`. This lets them carry a `files` pool
+// (like the 4-click `double` reaction) and never repeats the previous pick back to back.
+// Themes without `files` keep the original single-file behaviour.
+function patchDoubleClickPool(source) {
+  source = replaceOnce(
+    source,
+    "let firstClickDir = null;\n",
+    "let firstClickDir = null;\nlet lastDoubleClickFile = null;\n",
+    "click state declarations"
+  );
+  return replaceOnce(
+    source,
+    "        const react = dir === \"left\" ? leftReact : rightReact;\n        playReaction(react.file, react.duration || 2500);",
+    "        const react = dir === \"left\" ? leftReact : rightReact;\n" +
+    `        ${DOUBLE_CLICK_MARKER}\n` +
+    "        const pool = Array.isArray(react.files) && react.files.length ? react.files : [react.file];\n" +
+    "        const choices = pool.length > 1 ? pool.filter((f) => f !== lastDoubleClickFile) : pool;\n" +
+    "        lastDoubleClickFile = choices[Math.floor(Math.random() * choices.length)];\n" +
+    "        playReaction(lastDoubleClickFile, react.duration || 2500);",
+    "double-click reaction"
+  );
+}
+
 function patchHitRenderer(input) {
   let source = input.replace(/\r\n/g, "\n");
-  if (source.includes(PATCH_MARKER)) return { source, alreadyPatched: true };
+  const original = source;
+  // Each part checks its own marker so an install patched by an older version still gets the newer parts.
+  if (!source.includes(PATCH_MARKER)) source = patchHoverInteractions(source);
+  if (!source.includes(DOUBLE_CLICK_MARKER)) source = patchDoubleClickPool(source);
+  return { source, alreadyPatched: source === original };
+}
 
+function patchHoverInteractions(source) {
   source = replaceOnce(
     source,
     "  window.hitAPI.onThemeConfig((cfg) => {\n    tc = cfg || {};",
@@ -70,7 +100,7 @@ function patchHitRenderer(input) {
     "drag reaction section"
   );
   if (!source.includes(PATCH_MARKER)) fail("Patch marker is missing after patch construction.");
-  return { source, alreadyPatched: false };
+  return source;
 }
 
 function extractArchiveSafely(archivePath, destination) {
@@ -134,7 +164,7 @@ async function main() {
     await require("./repack-preserving-layout")(ASAR_PATH, extractedDir, nextAsar);
 
     const verification = asar.extractFile(nextAsar, "src/hit-renderer.js").toString("utf8");
-    if (!verification.includes(PATCH_MARKER)) fail("Repacked archive failed marker verification.");
+    if (!verification.includes(PATCH_MARKER) || !verification.includes(DOUBLE_CLICK_MARKER)) fail("Repacked archive failed marker verification.");
     const expectedInstalledHash = crypto.createHash("sha256").update(fs.readFileSync(nextAsar)).digest("hex");
     fs.copyFileSync(nextAsar, ASAR_PATH);
     const actualInstalledHash = crypto.createHash("sha256").update(fs.readFileSync(ASAR_PATH)).digest("hex");
