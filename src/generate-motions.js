@@ -9,8 +9,17 @@ const heart = `<path d="M-2 0h2v1h1V0h2v2H2v1H1v1H0V3h-1V2h-1Z" fill="#F47799"/>
 const star = `<path d="M0-2h1v2h2v1H1v2H0V1h-2V0h2Z" fill="#FFD77A"/>`;
 const note = c => `${rect(0,1,2,2,c)}${rect(1,-2,1,3,c)}${rect(2,-2,1,1,c)}`;
 const normal = rect(4,8,1,2,'#211F29')+rect(10,8,1,2,'#211F29');
-// Smiling eyes are drawn as >< squints.
-const happy = `<path d="M4 8l2 1l-2 1M11 8l-2 1l2 1" fill="none" stroke="#211F29" stroke-width="0.7"/>`;
+// Open eyes that blink every few seconds (svg() adds the blink track wherever this group appears).
+const blinking = `<g class="blink">${normal}</g>`;
+// Excited smiles are >< squints. They carry an extra blush pixel each, so the cheeks widen to 2px
+// only while the squint shows; class "blush" lets any blush track animate them together.
+const happy = `<path d="M4 8l2 1l-2 1M11 8l-2 1l2 1" fill="none" stroke="#211F29" stroke-width="0.7"/><g class="blush" opacity=".65">${rect(4,11,1,1,'#F28E9F')}${rect(10,11,1,1,'#F28E9F')}</g>`;
+// Calm smiles are soft ^^ arches.
+const soft = `<path d="M4 9.5l1-1.5l1 1.5M9 9.5l1-1.5l1 1.5" fill="none" stroke="#211F29" stroke-width="0.7"/>`;
+// Round startled eyes.
+const wide = rect(3.5,7.5,2,2,'#211F29')+rect(9.5,7.5,2,2,'#211F29');
+// Darker arm overlay so an arm stays readable while it crosses the same-coloured body.
+const armShade = '#BF6A52';
 const closed = rect(4,9,2,0.6,'#211F29')+rect(9,9,2,0.6,'#211F29');
 // Per-segment easing: a keyframe's curve applies from that keyframe to the next one.
 const E = {io:'cubic-bezier(.45,0,.55,1)', out:'cubic-bezier(.22,1,.36,1)', in:'cubic-bezier(.64,0,.78,0)', back:'cubic-bezier(.34,1.56,.64,1)'};
@@ -38,7 +47,7 @@ const specs = [
   left:sneezeArm,right:mirror(sneezeArm),
   prop:`<g class="prop">${star}</g>`,
   propAnim:[[0,{x:13,y:8,s:.4,o:0}],[35,{x:13,y:8,s:.4,o:0},'out'],[42,{x:16,y:6,s:1.2,o:1}],[60,{x:19,y:3,r:90,s:.9,o:.8},'in'],[75,{x:21,y:1,r:160,s:.5,o:0}],[100,{x:21,y:1,s:.5,o:0}]]},
- {id:'snack',title:'쿠키 냠냠',condition:'쉬는 동안 무작위',secs:8,eyes:happy,
+ {id:'snack',title:'쿠키 냠냠',condition:'쉬는 동안 무작위',secs:8,eyes:soft,
   body:[[24,{},'in'],[28,{r:2,sx:1.05,sy:.94},'out'],[34,{y:-.3},'in'],[40,{r:2,sx:1.05,sy:.94},'out'],[46,{y:-.3},'in'],[52,{r:2,sx:1.05,sy:.94},'out'],[58,{}],[72,{y:-1,sx:.97,sy:1.04}],[80,{sx:1.03,sy:.97}],[88,{}]],
   left:[[12,{r:30},'out'],[80,{r:30}],[88,{}]],
   right:[[12,{x:-5,y:-1},'out'],[28,{x:-5,y:-1.5}],[34,{x:-5,y:-1}],[40,{x:-5,y:-1.5}],[46,{x:-5,y:-1}],[52,{x:-5,y:-1.5}],[62,{x:-5,y:-1},'in'],[74,{},'out']],
@@ -71,7 +80,7 @@ const specs = [
   left:cheerArm,right:mirror(cheerArm),
   prop:`<g class="prop">${rect(0,1,1,2,'#F4A5C4')}${rect(14,2,1,2,'#AEDFD0')}${rect(4,-1,1,1,'#FFE48D')}${rect(11,0,1,1,'#B6BAF3')}</g>`,
   propAnim:[[0,{y:-2,o:0}],[18,{y:-3,o:0},'out'],[24,{y:-3.5,o:1}],[40,{x:.5,y:-1}],[56,{x:-.5,y:1.5}],[72,{x:.5,y:3.5},'in'],[88,{y:6,o:0}],[100,{y:6,o:0}]]},
- {id:'letter',title:'편지 왔어요',condition:'알림 상태에서 무작위',secs:5,eyes:happy,
+ {id:'letter',title:'편지 왔어요',condition:'알림 상태에서 무작위',secs:5,eyes:soft,
   body:[[10,{y:-1,sx:.97,sy:1.03},'in'],[16,{sx:1.04,sy:.96},'out'],[28,{r:4}],[42,{r:-4}],[56,{r:3.5}],[70,{r:-3.5}],[80,{}],[88,{y:-.6}],[94,{}]],
   left:letterArm,right:mirror(letterArm),
   prop:`<g>${rect(4,11,7,4,'#FFF0D8')}<path d="M4 11l3.5 2L11 11" fill="none" stroke="#D59887" stroke-width=".5"/></g>`},
@@ -90,7 +99,7 @@ const specs = [
   left:shyArm,right:mirror(shyArm)},
  {id:'typing-bounce',title:'콩콩 열일 타자',condition:'작업 세션 1개',secs:1.2,poses:{left:'translate(3px,3px)',right:'translate(-3px,4px)'},body:'25%,75%{transform:translateY(-.4px)}50%{transform:translate(0,0) rotate(0deg) scale(1)}',left:'25%,75%{transform:translate(3px,4px)}50%{transform:translate(3px,3px)}',right:'25%,75%{transform:translate(-3px,3px)}50%{transform:translate(-3px,4px)}',prop:`<g>${rect(2,14,11,2,'#C3BBCF')}${rect(3,14,9,.5,'#EEE8F4')}</g>`},
  // --- Second pack. slot = where the app picks it: 'idle' joins idleAnimations, anything else joins theme.states[slot].
- {id:'hum',title:'흥얼흥얼 콧노래',condition:'쉬는 동안 무작위',slot:'idle',secs:6,eyes:happy,
+ {id:'hum',title:'흥얼흥얼 콧노래',condition:'쉬는 동안 무작위',slot:'idle',secs:6,eyes:soft,
   body:[[10,{r:-4,y:-.4}],[25,{r:4}],[40,{r:-4,y:-.4}],[55,{r:4}],[70,{r:-4,y:-.4}],[85,{r:2}],[94,{}]],
   left:[[10,{r:25}],[25,{r:-5}],[40,{r:25}],[55,{r:-5}],[70,{r:25}],[85,{}]],
   right:[[10,{r:5}],[25,{r:-25}],[40,{r:5}],[55,{r:-25}],[70,{r:5}],[85,{}]],
@@ -98,7 +107,7 @@ const specs = [
   tracks:[{cls:'note1',k:[[0,{x:14,y:6,s:.5,o:0}],[8,{x:14,y:6,s:.5,o:0},'out'],[16,{x:15,y:3,o:1}],[40,{x:18,y:-3,r:10,o:0}],[100,{x:18,y:-3,o:0}]]},
           {cls:'note2',k:[[0,{x:15,y:5,s:.5,o:0}],[38,{x:15,y:5,s:.5,o:0},'out'],[46,{x:16,y:2,o:1}],[70,{x:13,y:-4,r:-10,o:0}],[100,{x:13,y:-4,o:0}]]}]},
  {id:'butterfly',title:'나비 친구',condition:'쉬는 동안 무작위',slot:'idle',secs:8,
-  eyes:`<g class="eyesN">${normal}</g><g class="eyesH">${happy}</g>`,
+  eyes:`<g class="eyesN">${blinking}</g><g class="eyesH">${soft}</g>`,
   body:[[15,{x:-.5,r:-3}],[30,{}],[42,{x:.5,r:3}],[55,{}],[60,{sx:1.03,sy:.97},'out'],[66,{y:-.2}],[80,{}],[88,{x:.5,y:-.5,r:3}],[96,{}]],
   right:[[80,{}],[88,{r:-40}],[96,{}]],
   prop:`<g class="bfly"><g class="flap">${rect(-2,-1,2,2,'#F4A5C4')}${rect(1,-1,2,2,'#F4A5C4')}${rect(0,-1,1,3,'#514454')}</g></g>`,
@@ -125,7 +134,7 @@ const specs = [
   propAnim:[[0,{x:10,y:4,s:.3,o:0}],[14,{x:10,y:4,s:.3,o:0},'back'],[18,{x:10,y:3,o:.9}],[30,{x:11,y:-1,o:0}],[41,{x:10,y:4,s:.3,o:0},'back'],[45,{x:10,y:3,o:.9}],[57,{x:11,y:-1,o:0}],[68,{x:10,y:4,s:.3,o:0},'back'],[72,{x:10,y:3,s:1.2,o:.9}],[84,{x:11,y:-2,s:1.2,o:0}],[100,{x:11,y:-2,o:0}]],
   tracks:[{cls:'blush',k:[[0,{o:.65}],[80,{o:.65}],[86,{o:1}],[94,{o:1}],[100,{o:.65}]]}]},
  {id:'flower',title:'킁킁 꽃 냄새',condition:'쉬는 동안 무작위',slot:'idle',secs:7,
-  eyes:`<g class="eyesN">${normal}</g><g class="eyesH">${happy}</g>`,
+  eyes:`<g class="eyesN">${blinking}</g><g class="eyesH">${soft}</g>`,
   body:[[20,{}],[32,{x:1,y:-.2,r:7}],[40,{x:1.2,r:8,sx:1.03,sy:.97}],[46,{x:1,r:7}],[52,{x:1.2,r:8,sx:1.03,sy:.97}],[60,{x:.5,y:-1,r:-3,sx:.97,sy:1.04},'out'],[74,{y:-.6,r:-2}],[86,{}]],
   prop:`<g class="flower">${rect(16,11,1,4,'#8FBF7A')}${rect(17,12,1,1,'#8FBF7A')}${rect(15,9,3,1,'#F4A5C4')}${rect(16,8,1,3,'#F4A5C4')}${rect(16,9,1,1,'#FFE48D')}</g>`,
   tracks:[{cls:'flower',origin:'50% 100%',k:[[0,{sx:.6,sy:0}],[8,{sx:.6,sy:0},'back'],[20,{}],[34,{r:-6}],[48,{r:4}],[62,{r:-3}],[80,{},'in'],[92,{sx:.6,sy:0}],[100,{sx:.6,sy:0}]]},
@@ -153,27 +162,34 @@ const specs = [
   propAnim:[[0,{x:12.5,y:4,s:.3,o:0}],[10,{x:12.5,y:4,s:.3,o:0},'back'],[18,{x:12.5,y:4.5,o:1}],[56,{x:13,y:8,o:1},'in'],[66,{x:13,y:10,s:.6,o:0}],[100,{x:13,y:10,s:.6,o:0}]]},
  // --- Double-click pack. slot 'double-click' joins the shared pool picked on every 2-click, together with kiss.
  // All of them run 3.2s so the single reaction duration never cuts one short or replays its start.
- {id:'tickle',title:'간지러워 꺄르르',condition:'더블클릭 시 무작위',slot:'double-click',secs:3.2,eyes:happy,
-  body:[[6,{x:1.2,r:4,sx:.96,sy:1.04},'out'],[16,{x:.8,r:-3,sx:1.05,sy:.95}],[26,{x:1.2,r:4,sx:.96,sy:1.04}],[36,{x:.8,r:-3,sx:1.05,sy:.95}],[46,{x:1.2,r:4,sx:.96,sy:1.04}],[56,{x:.8,r:-3,sx:1.05,sy:.95}],[68,{x:.4,y:-.5,r:1}],[82,{}]],
-  left:[[8,{x:2.5,y:-.5},'out'],[64,{x:2.5,y:-.5}],[80,{},'out']],
-  right:[[6,{r:-40}],[16,{r:10}],[26,{r:-40}],[36,{r:10}],[46,{r:-40}],[56,{r:10}],[70,{}]],
+ {id:'tickle',title:'간지러워 꺄르르',condition:'더블클릭 시 무작위',slot:'double-click',secs:3.2,shade:true,
+  eyes:`<g class="eyesW">${wide}</g><g class="eyesH">${happy}</g>`,
+  // A short round-eyed flinch first, then the >< giggle bursts out.
+  body:[[4,{y:-.8,sx:.94,sy:1.06},'out'],[10,{}],[16,{x:1.2,r:4,sx:.96,sy:1.04}],[25,{x:.8,r:-3,sx:1.05,sy:.95}],[34,{x:1.2,r:4,sx:.96,sy:1.04}],[43,{x:.8,r:-3,sx:1.05,sy:.95}],[52,{x:1.2,r:4,sx:.96,sy:1.04}],[61,{x:.8,r:-3,sx:1.05,sy:.95}],[72,{x:.4,y:-.5,r:1}],[84,{}]],
+  left:[[10,{},'out'],[16,{x:2.5,y:-.5}],[66,{x:2.5,y:-.5}],[80,{},'out']],
+  right:[[4,{r:-20}],[10,{}],[16,{r:-40}],[25,{r:10}],[34,{r:-40}],[43,{r:10}],[52,{r:-40}],[61,{r:10}],[74,{}]],
   prop:`<g class="giggle1">${rect(0,0,1,1,'#F4A5C4')}</g><g class="giggle2">${rect(0,0,1,1,'#FFE48D')}</g><g class="giggle3">${rect(0,0,1,1,'#B6BAF3')}</g>`,
-  tracks:[{cls:'giggle1',k:[[0,{x:-1,y:9,s:.3,o:0}],[6,{x:-1,y:9,s:.3,o:0},'out'],[12,{x:-2,y:7,s:1.2,o:1}],[30,{x:-3,y:4,o:0}],[100,{x:-3,y:4,o:0}]]},
-          {cls:'giggle2',k:[[0,{x:15,y:8,s:.3,o:0}],[20,{x:15,y:8,s:.3,o:0},'out'],[26,{x:16,y:6,s:1.2,o:1}],[44,{x:17,y:3,o:0}],[100,{x:17,y:3,o:0}]]},
-          {cls:'giggle3',k:[[0,{x:-1,y:8,s:.3,o:0}],[40,{x:-1,y:8,s:.3,o:0},'out'],[46,{x:-2,y:6,s:1.2,o:1}],[64,{x:-2.5,y:3,o:0}],[100,{x:-2.5,y:3,o:0}]]},
-          {cls:'blush',k:[[0,{o:.65}],[8,{o:1}],[70,{o:1}],[86,{o:.65}],[100,{o:.65}]]}]},
- {id:'hug-heart',title:'하트 받기 꼬옥',condition:'더블클릭 시 무작위',slot:'double-click',secs:3.2,
-  eyes:`<g class="eyesN">${normal}</g><g class="eyesH">${happy}</g>`,
+  tracks:[{cls:'giggle1',k:[[0,{x:-1,y:9,s:.3,o:0}],[12,{x:-1,y:9,s:.3,o:0},'out'],[18,{x:-2,y:7,s:1.2,o:1}],[34,{x:-3,y:4,o:0}],[100,{x:-3,y:4,o:0}]]},
+          {cls:'giggle2',k:[[0,{x:15,y:8,s:.3,o:0}],[26,{x:15,y:8,s:.3,o:0},'out'],[32,{x:16,y:6,s:1.2,o:1}],[48,{x:17,y:3,o:0}],[100,{x:17,y:3,o:0}]]},
+          {cls:'giggle3',k:[[0,{x:-1,y:8,s:.3,o:0}],[44,{x:-1,y:8,s:.3,o:0},'out'],[50,{x:-2,y:6,s:1.2,o:1}],[66,{x:-2.5,y:3,o:0}],[100,{x:-2.5,y:3,o:0}]]},
+          {cls:'eyesW',k:[[0,{o:1}],[9,{o:1}],[10,{o:0}],[100,{o:0}]]},
+          {cls:'eyesH',k:[[0,{o:0}],[9,{o:0}],[10,{o:1}],[100,{o:1}]]},
+          {cls:'shadeL',k:[[0,{o:0}],[12,{o:0}],[16,{o:1}],[68,{o:1}],[76,{o:0}],[100,{o:0}]]},
+          {cls:'blush',k:[[0,{o:.65}],[12,{o:1}],[72,{o:1}],[86,{o:.65}],[100,{o:.65}]]}]},
+ {id:'hug-heart',title:'하트 받기 꼬옥',condition:'더블클릭 시 무작위',slot:'double-click',secs:3.2,shade:true,
+  eyes:`<g class="eyesN">${blinking}</g><g class="eyesH">${happy}</g>`,
   body:[[18,{}],[30,{x:-.4,y:-.4,r:-4},'in'],[38,{sx:1.06,sy:.94},'out'],[46,{y:-.8,sx:.97,sy:1.03}],[56,{r:-3}],[66,{r:3}],[76,{r:-2}],[88,{}]],
   left:[[16,{},'out'],[30,{r:70}],[38,{x:3,y:-.5},'out'],[80,{x:3,y:-.5}],[92,{}]],
   right:mirror([[16,{},'out'],[30,{r:70}],[38,{x:3,y:-.5},'out'],[80,{x:3,y:-.5}],[92,{}]]),
   prop:`<g class="prop">${heart}</g>`,
   propAnim:[[0,{x:-5,y:-2,s:.5,o:0}],[8,{x:-5,y:-2,s:.5,o:0},'out'],[16,{x:-2,y:-1,s:1,o:1}],[28,{x:3,y:1,r:-10}],[36,{x:7,y:9,s:.8},'out'],[48,{x:7,y:9,s:.95}],[58,{x:7,y:9,s:.8}],[68,{x:7,y:9,s:.95}],[80,{x:7,y:9,s:.8,o:1},'in'],[90,{x:7,y:7.5,s:.5,o:0}],[100,{x:7,y:7.5,s:.5,o:0}]],
-  tracks:[{cls:'eyesN',k:[[0,{o:1}],[36,{o:1}],[38,{o:0}],[86,{o:0}],[88,{o:1}],[100,{o:1}]]},
+  tracks:[{cls:'shadeL',k:[[0,{o:0}],[32,{o:0}],[38,{o:1}],[82,{o:1}],[90,{o:0}],[100,{o:0}]]},
+          {cls:'shadeR',k:[[0,{o:0}],[32,{o:0}],[38,{o:1}],[82,{o:1}],[90,{o:0}],[100,{o:0}]]},
+          {cls:'eyesN',k:[[0,{o:1}],[36,{o:1}],[38,{o:0}],[86,{o:0}],[88,{o:1}],[100,{o:1}]]},
           {cls:'eyesH',k:[[0,{o:0}],[36,{o:0}],[38,{o:1}],[86,{o:1}],[88,{o:0}],[100,{o:0}]]},
           {cls:'blush',k:[[0,{o:.65}],[40,{o:.65}],[48,{o:1}],[80,{o:1}],[90,{o:.65}],[100,{o:.65}]]}]},
  {id:'surprise',title:'깜짝! 느낌표',condition:'더블클릭 시 무작위',slot:'double-click',secs:3.2,
-  eyes:`<g class="eyesW">${rect(3.5,7.5,2,2,'#211F29')}${rect(9.5,7.5,2,2,'#211F29')}</g><g class="eyesH">${happy}</g>`,
+  eyes:`<g class="eyesW">${wide}</g><g class="eyesH">${happy}</g>`,
   body:[[4,{sx:1.08,sy:.9},'out'],[12,{y:-3.5,sx:.9,sy:1.12},'in'],[22,{sx:1.1,sy:.88},'out'],[30,{y:-.4}],[36,{}],[42,{x:.4}],[46,{x:-.4}],[50,{x:.4}],[54,{}],[66,{y:-.4,r:-3}],[78,{r:2}],[90,{}]],
   left:[[4,{},'out'],[12,{r:130}],[26,{r:110}],[40,{r:40}],[56,{}]],
   right:mirror([[4,{},'out'],[12,{r:130}],[26,{r:110}],[40,{r:40}],[56,{}]]),
@@ -192,8 +208,13 @@ function svg(s){
   :`.${name}{${origin(name)};transform:${s.poses?.[name]||'translate(0,0) rotate(0deg) scale(1)'};animation:${name} ${s.secs}s infinite ease-in-out}@keyframes ${name}{0%,100%{transform:${s.poses?.[name]||'translate(0,0) rotate(0deg) scale(1)'}}${k||''}}`;
  const propKeys=Array.isArray(s.propAnim)?frames(s.propAnim):(s.propAnim||'0%,100%{opacity:1}');
  // Extra animated parts (second prop, eye swaps, blush, wing flaps), each with its own class and keyframes.
- const extra=(s.tracks||[]).map(t=>`.${t.cls}{transform-box:fill-box;transform-origin:${t.origin||'50% 50%'};transform:${T()};animation:${t.cls} ${t.secs||s.secs}s infinite ${E.io}}@keyframes ${t.cls}{${frames(t.k)}}`).join('');
- return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500"><title>${s.title}</title><style>${anim('body',s.body)}${anim('left',s.left)}${anim('right',s.right)}${anim('feet',s.feet)}.prop{transform-box:fill-box;transform-origin:50% 50%;animation:prop ${s.secs}s infinite ${E.io}}@keyframes prop{${propKeys}}${extra}</style>${rect(3,15,9,1,'#514454')}<g id="accessory-anchor" class="body"><g fill="#DE886D"><g class="feet"><rect x="3" y="13" width="1" height="2"/><rect x="5" y="13" width="1" height="2"/><rect x="9" y="13" width="1" height="2"/><rect x="11" y="13" width="1" height="2"/></g><rect x="2" y="6" width="11" height="7"/><g class="left"><rect x="0" y="9" width="2" height="2"/></g><g class="right"><rect x="13" y="9" width="2" height="2"/></g></g>${s.eyes||normal}<g class="blush" opacity=".65">${rect(3,11,1,1,'#F28E9F')}${rect(11,11,1,1,'#F28E9F')}</g></g>${s.prop||''}</svg>`;
+ const eyes=s.eyes||blinking;
+ const tracks=[...(s.tracks||[])];
+ // Close for a moment near the middle of every 3.6s, independent of the motion length.
+ if(eyes.includes('class="blink"'))tracks.push({cls:'blink',secs:3.6,k:[[44,{}],[46,{sy:.1}],[49,{}]]});
+ const shade=side=>s.shade?`<rect class="shade${side}" x="${side==='L'?0:13}" y="9" width="2" height="2" fill="${armShade}" opacity="0"/>`:'';
+ const extra=tracks.map(t=>`.${t.cls}{transform-box:fill-box;transform-origin:${t.origin||'50% 50%'};transform:${T()};animation:${t.cls} ${t.secs||s.secs}s infinite ${E.io}}@keyframes ${t.cls}{${frames(t.k)}}`).join('');
+ return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500"><title>${s.title}</title><style>${anim('body',s.body)}${anim('left',s.left)}${anim('right',s.right)}${anim('feet',s.feet)}.prop{transform-box:fill-box;transform-origin:50% 50%;animation:prop ${s.secs}s infinite ${E.io}}@keyframes prop{${propKeys}}${extra}</style>${rect(3,15,9,1,'#514454')}<g id="accessory-anchor" class="body"><g fill="#DE886D"><g class="feet"><rect x="3" y="13" width="1" height="2"/><rect x="5" y="13" width="1" height="2"/><rect x="9" y="13" width="1" height="2"/><rect x="11" y="13" width="1" height="2"/></g><rect x="2" y="6" width="11" height="7"/><g class="left"><rect x="0" y="9" width="2" height="2"/>${shade('L')}</g><g class="right"><rect x="13" y="9" width="2" height="2"/>${shade('R')}</g></g>${eyes}<g class="blush" opacity=".65">${rect(3,11,1,1,'#F28E9F')}${rect(11,11,1,1,'#F28E9F')}</g></g>${s.prop||''}</svg>`;
 }
 const theme=JSON.parse(fs.readFileSync(path.join(root,'theme.json'),'utf8'));
 for(const s of specs){s.file=`clawd-cute-${s.id}.svg`;fs.writeFileSync(path.join(out,s.file),svg(s));}
